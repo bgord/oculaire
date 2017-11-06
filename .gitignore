@@ -1,0 +1,11 @@
+*~
+*.pdf
+*.html
+*.1
+node_modules
+uploaded_files
+
+# Disable Docker Compose related files
+.ash_history
+.bash_history
+.env
