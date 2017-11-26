@@ -4,7 +4,7 @@
 *.1
 node_modules
 uploaded_files
-
+npm-debug.log
 # Disable Docker Compose related files
 .ash_history
 .bash_history

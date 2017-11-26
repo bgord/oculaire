@@ -6,12 +6,14 @@
 	"scripts": {
 		"start-db": "docker-compose up -d db",
 		"start": "docker-compose up app webserver",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "docker-compose run --entrypoint npm app run mocha ",
+		"mocha": "mocha setup-test.js src/**/*.test.js"
 	},
 	"dependencies": {
+		"axios": "^0.17.1",
+		"bluebird": "^3.5.1",
 		"sealious": "github:sealcode/sealious-archive#alpha",
-		"sealious-datastore-mongo":
-			"github:sealcode/sealious-datastore-mongo#alpha",
+		"sealious-datastore-mongo": "github:sealcode/sealious-datastore-mongo#alpha",
 		"sealious-www-server": "sealcode/sealious-www-server#alpha"
 	},
 	"repository": {
@@ -19,5 +21,11 @@
 		"url": "ssh://git@hub.sealcode.org:62022/diffusion/18/oculaire.git"
 	},
 	"author": "Bartosz Gordon",
-	"license": "ISC"
+	"license": "ISC",
+	"devDependencies": {
+		"@3846masa/axios-cookiejar-support": "^0.1.4",
+		"chai": "^4.1.2",
+		"mocha": "^3.5.3",
+		"tough-cookie": "^2.3.3"
+	}
 }
