@@ -1,6 +1,37 @@
 module.exports = function(app) {
-	var Users = app.ChipManager.get_chip("collection", "users");
+	const Users = app.ChipManager.get_chip("collection", "users");
+
+	Users.add_fields([
+		{
+			name: "e_mail",
+			type: "email",
+			required: true,
+		},
+		{
+			name: "start_weight",
+			type: "int",
+			params: {
+				min: 1,
+			},
+			required: true,
+		},
+		{
+			name: "gender",
+			type: "enum",
+			params: {
+				values: ["m", "f"],
+			},
+			required: true,
+		},
+		{
+			name: "strava_api_key",
+			type: "text",
+		},
+	]);
+
 	Users.set_access_strategy({
-		default: "public",
+		default: "themselves",
+		create: "public",
+		delete: "noone",
 	});
 };
