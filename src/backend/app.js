@@ -2,7 +2,11 @@ const Sealious = require("sealious");
 
 const App = new Sealious.App();
 
-const dependencies = ["collections/users.js", "collections/products.js"];
+const dependencies = [
+	"collections/users.js",
+	"collections/products.js",
+	"collections/goals.js",
+];
 
 dependencies.forEach(dependency => require(`./${dependency}`)(App));
 
