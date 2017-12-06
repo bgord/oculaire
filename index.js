@@ -8,4 +8,11 @@ app
 			{ "body.e_mail": 1 },
 			{ unique: true }
 		)
+	)
+	.then(() =>
+		app._app.Datastore.createIndex(
+			"days",
+			{ "body.date": 1, "body.user": 1 },
+			{ unique: true }
+		)
 	);

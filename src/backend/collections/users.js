@@ -8,14 +8,6 @@ module.exports = function(app) {
 			required: true,
 		},
 		{
-			name: "start_weight",
-			type: "int",
-			params: {
-				min: 1,
-			},
-			required: true,
-		},
-		{
 			name: "gender",
 			type: "enum",
 			params: {
