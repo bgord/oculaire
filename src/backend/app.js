@@ -8,6 +8,7 @@ const dependencies = [
 	"collections/products.js",
 	"collections/days.js",
 	"collections/goals.js",
+	"collections/dayproducts.js",
 	"collections/activities.js",
 ];
 
