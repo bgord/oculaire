@@ -50,14 +50,15 @@ before(() => {
 				TEST_CONFIG.USER.CREDENTIALS
 			)
 		)
-		.then(({ id }) =>
-			App.run_action(
+		.then(({ id }) => {
+			global.TEST_CONFIG.USER.ID = id;
+			return App.run_action(
 				new App.Sealious.SuperContext(),
 				["collections", "days"],
 				"create",
 				Object.assign({}, TEST_CONFIG.DAY, { user: id })
-			)
-		)
+			);
+		})
 		.then(day => {
 			global.TEST_CONFIG.DAY.ID = day.id;
 			global.TEST_CONFIG.DAY.USER = day.body.user;
@@ -68,11 +69,11 @@ before(() => {
 });
 
 after(() =>
-	Promise.all(
-		App.ChipManager
-			.get_all_collections()
-			.map(collection_name =>
-				App.Datastore.remove(collection_name, {}, "just_one" && false)
-			)
+Promise.all(
+	App.ChipManager
+		.get_all_collections()
+		.map(collection_name =>
+			App.Datastore.remove(collection_name, {}, "just_one" && false)
+		)
 	).then(() => console.log("### Cleared test database"))
 );

@@ -42,11 +42,9 @@ module.exports = function(App) {
 			},
 		],
 		access_strategy: {
+			default: ["field-owner", ["user"]],
 			create: "super",
 			delete: "noone",
-			// logged_in strategy is temporary - it will eventually be replaced with the `field_owner` strategy
-			retrieve: "logged_in",
-			update: "logged_in",
 		},
 	});
 };

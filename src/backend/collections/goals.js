@@ -21,8 +21,7 @@ module.exports = function(App) {
 			},
 		],
 		access_strategy: {
-			// logged_in strategy is temporary - it will eventually be replaced with the `field_owner` strategy
-			default: "logged_in",
+			default: ["field-owner", ["user"]],
 			update: "noone",
 			delete: "noone",
 		},
