@@ -21,7 +21,7 @@ module.exports = function(App) {
 			},
 		],
 		access_strategy: {
-			default: ["field-owner", ["user"]],
+			default: ["item-field-owner", ["user"]],
 			update: "noone",
 			delete: "noone",
 		},

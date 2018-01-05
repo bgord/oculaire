@@ -4,7 +4,7 @@ const DENY = [{ $match: { _id: { $exists: false } } }];
 
 module.exports = function(app) {
 	return app.createChip(Sealious.AccessStrategyType, {
-		name: "field-owner",
+		name: "item-field-owner",
 		get_pre_aggregation_stage: function(context, params) {
 			if (!context.user_id) {
 				return DENY;
@@ -24,7 +24,9 @@ module.exports = function(app) {
 			} else if (context.user_id === item.body[params[0]]) {
 				return Promise.resolve();
 			} else {
-				return Promise.reject(`Nie jesteś właścicielem pola ${params[0]}!`);
+				return Promise.reject(
+					`Nie jesteś właścicielem pola ${params[0]}!`
+				);
 			}
 		},
 		item_sensitive: true,

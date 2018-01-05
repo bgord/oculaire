@@ -25,8 +25,7 @@ module.exports = function(App) {
 		access_strategy: {
 			default: "noone",
 			create: "super",
-			// logged_in strategy is temporary - it will eventually be replaced with the `day_owner` strategy
-			retrieve: "logged_in",
+			retrieve: ["collection-field-owner", ["day", "days", "user"]],
 		},
 	});
 };

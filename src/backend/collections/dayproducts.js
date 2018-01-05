@@ -7,8 +7,8 @@ module.exports = function(App) {
 				type: "single_reference",
 				params: { collection: "days" },
 				required: true,
-            },
-            {
+			},
+			{
 				name: "product",
 				type: "single_reference",
 				params: { collection: "products" },
@@ -17,13 +17,21 @@ module.exports = function(App) {
 			{
 				name: "product_weight",
 				type: "int",
-				params: { min: 1 },				
+				params: { min: 1 },
 				required: true,
 			},
 		],
 		access_strategy: {
-			// logged_in strategy is temporary - it will eventually be replaced with the `day_owner` strategy
-			default: "logged_in",
+			default: [
+				"collection-field-owner",
+				[
+					{
+						localField: "day",
+						collection: "days",
+						foreignField: "user",
+					},
+				],
+			],
 		},
 	});
 };
