@@ -1,3 +1,5 @@
+const { endOfDay, format } = require("date-fns");
+
 module.exports = function(App) {
 	const Days = App.createCollection({
 		name: "days",
@@ -45,6 +47,40 @@ module.exports = function(App) {
 			default: ["item-field-owner", ["user"]],
 			create: "super",
 			delete: "noone",
+		},
+		calculated_fields: {
+			daily_calories_budget: [
+				"custom",
+				function(app, context, item, db_document) {
+					const day_date = db_document.body.date;
+					const day_end = format(endOfDay(new Date(day_date)), "X");
+					return app
+						.run_action(
+							new app.Sealious.SuperContext(),
+							["collections", "goals"],
+							"show",
+
+							{
+								filter: {
+									user: context.user_id,
+									created_at: { "<=": day_end },
+								},
+								sort: { "body.created_at": "desc" },
+								pagination: { items: 1 },
+							}
+						)
+						.then(
+							resp =>
+								resp.length !== 0
+									? {
+											created_at: resp[0].body.created_at,
+											calories_budget:
+												resp[0].body.calories_budget,
+										}
+									: {}
+						);
+				},
+			],
 		},
 	});
 };

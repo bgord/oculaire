@@ -12,6 +12,7 @@
 	"dependencies": {
 		"axios": "^0.17.1",
 		"bluebird": "^3.5.1",
+		"date-fns": "^1.29.0",
 		"jsdom": "^11.5.1",
 		"sealious": "github:sealcode/sealious-archive#alpha",
 		"sealious-datastore-mongo": "github:sealcode/sealious-datastore-mongo#alpha",

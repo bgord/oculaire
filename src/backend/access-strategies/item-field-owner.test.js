@@ -23,9 +23,10 @@ describe("Field-owner access-strategy", () => {
 		return axios
 			.post(test_goals_url, invalid_goal, TEST_CONFIG.USERS.SOME.SESSION)
 			.catch(err =>
-				Assert.equal(
-					err.response.data.message,
-					"Nie jesteś właścicielem pola user!"
+				Assert(
+					err.response.data.message.indexOf(
+						"Nie jesteś właścicielem pola user!"
+					) !== -1
 				)
 			);
 	});
