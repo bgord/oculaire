@@ -17,6 +17,21 @@ const dependencies = [
 dependencies.forEach(dependency => require(`./${dependency}`)(App));
 
 module.exports = {
-	start: () => App.start(),
+	start: () =>
+		App.start()
+			.then(() =>
+				App.Datastore.createIndex(
+					"users",
+					{ "body.e_mail": 1 },
+					{ unique: true }
+				)
+			)
+			.then(() =>
+				App.Datastore.createIndex(
+					"days",
+					{ "body.date": 1, "body.user": 1 },
+					{ unique: true }
+				)
+			),
 	_app: App,
 };

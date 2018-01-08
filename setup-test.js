@@ -1,7 +1,10 @@
 const app = require("./src/backend/app.js");
 const Promise = require("bluebird");
-
 const App = app._app;
+
+const create_current_day_resources_for_every_user = require("./src/backend/utils/create_current_day_resources_for_every_user");
+const DAY = 1000 * 60 * 60 * 24;
+const run_daily_at = require("./src/backend/utils/run_at_specified_time")(DAY);
 
 const axios = require("axios");
 const axiosCookieJarSupport = require("@3846masa/axios-cookiejar-support");
@@ -147,6 +150,14 @@ before(() => {
 						create_resource("days", day)
 					)
 				)
+			)
+		)
+		.then(() =>
+			run_daily_at(
+				0,
+				0,
+				() => create_current_day_resources_for_every_user(App),
+				"Create_current_day_resources_for_every_user"
 			)
 		);
 });

@@ -16,7 +16,8 @@
 		"jsdom": "^11.5.1",
 		"sealious": "github:sealcode/sealious-archive#alpha",
 		"sealious-datastore-mongo": "github:sealcode/sealious-datastore-mongo#alpha",
-		"sealious-www-server": "sealcode/sealious-www-server#alpha"
+		"sealious-www-server": "sealcode/sealious-www-server#alpha",
+		"sinon": "^4.1.3"
 	},
 	"repository": {
 		"type": "git",

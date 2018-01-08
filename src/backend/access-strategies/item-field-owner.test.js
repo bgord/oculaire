@@ -32,6 +32,8 @@ describe("Field-owner access-strategy", () => {
 	});
 	it("Allows a user to see resources with the user field matching his context user_id", () =>
 		get_collection_as("days", "SOME").then(days =>
-			Assert.equal(days.length, 2)
+			days.forEach(day =>
+				Assert.equal(TEST_CONFIG.USERS.SOME.ID, day.body.user)
+			)
 		));
 });

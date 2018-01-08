@@ -9,3 +9,4 @@ npm-debug.log
 .ash_history
 .bash_history
 .env
+.config
