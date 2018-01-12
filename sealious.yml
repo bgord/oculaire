@@ -10,3 +10,8 @@ image_formats:
     size: [100, 100]
 www-server:
   port: 8081
+nodemailer_config:
+  service: ""
+  auth:
+    user: ""
+    pass: ""

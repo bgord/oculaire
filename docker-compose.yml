@@ -27,6 +27,7 @@ services:
     ports:
       - "127.0.0.1:8081:8081"
     user: ${UID:-1000}:${GID:-1000}
+    env_file: .env
   webserver:
     image: oculaire-webserver:latest
     build:
@@ -35,6 +36,7 @@ services:
     ports:
       - "127.0.0.1:81:81"
       - "127.0.0.1:444:444"
+    env_file: .env
 volumes:
   mongo_db:
   mongo_configdb:

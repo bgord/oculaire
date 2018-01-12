@@ -2,11 +2,14 @@ const Sealious = require("sealious");
 
 const App = new Sealious.App();
 
+require("../../custom-routes")(App);
+
 const dependencies = [
 	"field-types/control-update.js",
 	"access-strategies/item-field-owner.js",
 	"access-strategies/collection-field-owner.js",
 	"collections/users.js",
+	"collections/registration-intents.js",
 	"collections/products.js",
 	"collections/days.js",
 	"collections/goals.js",
