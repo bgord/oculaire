@@ -1,6 +1,5 @@
 *~
 *.pdf
-*.html
 *.1
 node_modules
 uploaded_files
@@ -13,4 +12,6 @@ npm-debug.log
 .cache
 dist
 .npm
-
+.node-gyp
+public/*
+!public/static

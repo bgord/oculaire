@@ -7,13 +7,20 @@
 		"start-db": "docker-compose up -d db",
 		"start": "docker-compose up app webserver",
 		"test": "docker-compose run --rm --entrypoint npm -e NODE_ENV=TEST app run mocha ",
-		"mocha": "mocha setup-test.js src/**/*.test.js"
+		"mocha": "mocha setup-test.js src/**/*.test.js",
+		"build": "parcel build src/frontend/index.html --out-dir public --public-url /",
+		"watch": "parcel watch src/frontend/index.html --no-hmr --out-dir public --public-url /"
 	},
 	"dependencies": {
 		"axios": "^0.17.1",
+		"babel-preset-env": "^1.6.1",
+		"babel-preset-react": "^6.24.1",
 		"bluebird": "^3.5.1",
 		"date-fns": "^1.29.0",
 		"jsdom": "^11.5.1",
+		"parcel-bundler": "^1.4.1",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
 		"nodemailer": "^4.4.1",
 		"sealious": "github:sealcode/sealious-archive#alpha",
 		"sealious-datastore-mongo": "github:sealcode/sealious-datastore-mongo#alpha",
@@ -31,6 +38,7 @@
 		"@3846masa/axios-cookiejar-support": "^0.1.4",
 		"chai": "^4.1.2",
 		"mocha": "^3.5.3",
+		"node-sass": "^4.7.2",
 		"tough-cookie": "^2.3.3"
 	}
 }
