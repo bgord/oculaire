@@ -1,4 +1,3 @@
-const { messages } = require("./registration-intent");
 const axios = require("axios");
 const sinon = require("sinon");
 
@@ -11,13 +10,18 @@ describe("registration-intent", () => {
 	it("Rejects when e_mail field is not present", () =>
 		axios
 			.post(REGISTRATION_URL)
-			.then(resp => Assert.equal(messages["no-email"], resp.data)));
+			.catch(e =>
+				Assert.deepEqual("no-email", e.response.data.message.type)
+			));
+
 	it("Rejects when account with the given e_mail exists", () =>
 		axios
 			.post(REGISTRATION_URL, {
 				e_mail: TEST_CONFIG.USERS.SOME.CREDENTIALS.e_mail,
 			})
-			.then(resp => Assert.equal(messages["email-taken"], resp.data)));
+			.catch(e =>
+				Assert.deepEqual("email-taken", e.response.data.message.type)
+			));
 	it("Rejects if there's register intent with given e_mail", () =>
 		axios
 			.post(REGISTRATION_URL, {
@@ -28,7 +32,16 @@ describe("registration-intent", () => {
 					e_mail: "unique@ve.ry",
 				})
 			)
-			.then(resp => Assert.equal(messages["email-taken"], resp.data)));
+			.catch(e =>
+				Assert.deepEqual("email-taken", e.response.data.message.type)
+			));
+
+	it("Rejects if given email is invalid", () =>
+		axios
+			.post(REGISTRATION_URL, { e_mail: "cośzłego" })
+			.catch(e =>
+				Assert.deepEqual("email-invalid", e.response.data.message.type)
+			));
 
 	before(() => {
 		clock = sinon.useFakeTimers(new Date());
@@ -47,7 +60,7 @@ describe("registration-intent", () => {
 					e_mail: "unusual@ve.ry",
 				})
 			)
-			.then(resp => Assert.equal(messages["email-sent"], resp.data)));
+			.then(resp => Assert.deepEqual("email-sent", resp.data.type)));
 	after(() => {
 		clock.restore();
 	});
@@ -57,5 +70,5 @@ describe("registration-intent", () => {
 			.post(REGISTRATION_URL, {
 				e_mail: "random@ve.ry",
 			})
-			.then(resp => Assert.equal(messages["email-sent"], resp.data)));
+			.then(resp => Assert.deepEqual("email-sent", resp.data.type)));
 });

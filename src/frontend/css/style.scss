@@ -1,0 +1,93 @@
+@import "reset.css";
+$dark: #4f5d75;
+$darker: #2d3142;
+$light: #bfc0c0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    text-rendering: optimizelegibility;
+    font-smooth: auto;
+    -webkit-font-smoothing: auto;
+}
+
+body {
+    padding: 0;
+    background-color: #fbfbfb;
+    font-family: "OpenSans", sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 200;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+}
+
+.navigation {
+    height: 2rem;
+    background-color: $darker;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+    &__header {
+        font-size: 1.33333rem;
+    }
+    &__form {
+        display: inline-block;
+        margin: 0 auto;
+        &__label {
+            display: block;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        &__input {
+            margin: 0 0 0.5rem auto;
+            padding: 0 0.75rem;
+            height: 2rem;
+            min-width: 12rem;
+            border: 1px solid #ccc;
+            color: #444;
+            outline: none;
+        }
+        &__button {
+            display: block;
+            height: 2rem;
+            width: 100%;
+            margin: 0 auto 1rem auto;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 15.5rem) {
+    .register {
+        margin-top: 1rem;
+        &__header {
+            padding: 0 0.5rem;
+        }
+        &__form {
+            padding: 0 0.5rem;
+            &__input {
+                min-width: 10rem;
+                width: 100%;
+                font-size: 0.6rem;
+                font-weight: 400;
+            }
+            &__label {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

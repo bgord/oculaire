@@ -6,11 +6,26 @@ const WEEK = 1000 * 60 * 60 * 24 * 7;
 
 const messages = {
 	"no-email": "Podaj swój adres email.",
+	"email-invalid": "Podany adres email jest nieprawidłowy.",
 	"email-taken": "Podany adres email jest zajęty.",
-	"email-sent":
-		"Na Twoją skrzynkę email został wysłany link aktywujący Twoje konto.",
 	"email-failed": "Nie udało się wysłać maila, spróbuj ponownie.",
+	"email-sent": "Wysłano link aktywujący na podany adres.",
 };
+
+const SEND_ERROR = ValidationError => (reason, additional_info = {}) =>
+	Promise.reject(
+		new ValidationError({
+			type: reason,
+			content: messages[reason],
+			additional_info,
+		})
+	);
+
+const RESOLVE = (reason, additional_info = {}) => ({
+	type: reason,
+	content: messages[reason],
+	additional_info,
+});
 
 module.exports = {
 	messages,
@@ -19,9 +34,11 @@ module.exports = {
 			"POST",
 			"/api/v1/registration-intent",
 			async function(app, context, params) {
+				const { base_url } = App.ConfigManager.get_config("www-server");
+				const REJECT = SEND_ERROR(app.Sealious.Errors.ValidationError);
 				const { e_mail } = params;
 				if (!e_mail) {
-					return Promise.reject(messages["no-email"]);
+					return REJECT("no-email");
 				}
 				const [users, intents] = await Promise.all([
 					app.run_action(
@@ -47,28 +64,32 @@ module.exports = {
 					),
 				]);
 				if (users.length || intents.length) {
-					return Promise.reject(messages["email-taken"]);
+					return REJECT("email-taken");
 				}
-				const intent = await app.run_action(
-					new app.Sealious.SuperContext(),
-					["collections", "registration-intents"],
-					"create",
-					{
-						e_mail,
-						token: uuid(),
-						expires_at: Date.now() + WEEK,
-					}
-				);
+				const intent = await app
+					.run_action(
+						new app.Sealious.SuperContext(),
+						["collections", "registration-intents"],
+						"create",
+						{
+							e_mail,
+							token: uuid(),
+							expires_at: Date.now() + WEEK,
+						}
+					)
+					.catch(e => REJECT("email-invalid"));
 				const { nodemailer_config } = App.ConfigManager.get_config();
-				//ofc this link is temporary and will be changed
-				const link = `/finish-registration&token=${intent.body.token}`;
+
+				const link = `${base_url}/finish-registration?token=${
+					intent.body.token
+				}`;
 				const scenario = generate_scenario["email-confirmation"](
 					intent,
 					link
 				);
 				try {
 					await send_email(nodemailer_config, scenario);
-					return messages["email-sent"];
+					return RESOLVE("email-sent");
 				} catch (e) {
 					console.log(e);
 					console.log(
@@ -80,7 +101,7 @@ module.exports = {
 							["collections", "registration-intents", intent.id],
 							"delete"
 						)
-						.then(() => messages["email-failed"]);
+						.then(() => REJECT("email-failed"));
 				}
 			}
 		);

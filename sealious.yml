@@ -10,6 +10,7 @@ image_formats:
     size: [100, 100]
 www-server:
   port: 8081
+  base_url: "https://localhost:444"
 nodemailer_config:
   service: ""
   auth:
