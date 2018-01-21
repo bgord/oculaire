@@ -13,12 +13,12 @@ const create_resource_as = (collection_name, data, user = null) => {
 describe("Daily_calories_budget caluculated field", () => {
 	it("Returns proper daily_calories_budget objects", () => {
 		const goal_from_2012_12_06 = {
-			created_at: 1354752000,
+			created_at: 1354752000000,
 			user: TEST_CONFIG.USERS.SOME.ID,
 			calories_budget: 1900,
 		};
 		const goal_from_2012_12_13 = {
-			created_at: 1355407200,
+			created_at: 1355407200000,
 			user: TEST_CONFIG.USERS.SOME.ID,
 			calories_budget: 2000,
 		};

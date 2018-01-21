@@ -53,7 +53,8 @@ module.exports = function(App) {
 				"custom",
 				function(app, context, item, db_document) {
 					const day_date = db_document.body.date;
-					const day_end = format(endOfDay(new Date(day_date)), "X");
+					const day_end =
+						format(endOfDay(new Date(day_date)), "X") * 1000;
 					return app
 						.run_action(
 							new app.Sealious.SuperContext(),

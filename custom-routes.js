@@ -5,4 +5,8 @@ module.exports = function(App) {
 		App,
 		www_server
 	);
+	require("./src/backend/custom-routes/finish-registration").route(
+		App,
+		www_server
+	);
 };

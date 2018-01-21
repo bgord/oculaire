@@ -10,6 +10,7 @@ const axios = require("axios");
 const axiosCookieJarSupport = require("@3846masa/axios-cookiejar-support");
 const tough = require("tough-cookie");
 axiosCookieJarSupport(axios);
+const login = require("./src/backend/utils/login");
 
 global.Assert = require("chai").assert;
 
@@ -17,13 +18,6 @@ const createCookieJar = () => ({
 	jar: new tough.CookieJar(),
 	withCredentials: true,
 });
-
-const login = ({ username, password }, SESSION) =>
-	axios.post(
-		TEST_CONFIG.BASE_URL + "sessions",
-		{ username, password },
-		SESSION
-	);
 
 global.TEST_CONFIG = {
 	USERS: {
