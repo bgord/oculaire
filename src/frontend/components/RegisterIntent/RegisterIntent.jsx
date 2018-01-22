@@ -38,26 +38,30 @@ export default class RegisterIntent extends PureComponent {
 	}
 	render() {
 		return (
-			<section className="register">
-				<h2 className="register__header">Zarejestruj się</h2>
+			<section className="auth-section">
+				<h2 className="auth-section__header">Zarejestruj się</h2>
 				<form
 					action="post"
 					onSubmit={this.handleSubmit}
-					className="register__form"
+					className="auth-section__form"
 				>
-					<label className="register__form__label" htmlFor="e_mail">
+					<label
+						className="auth-section__form__label auth-section__form__label--far-from-input auth-section__form__label--far-from-header"
+						htmlFor="e_mail"
+					>
 						Email:
 					</label>
 					<input
 						autoFocus
-						className="register__form__input"
+						className="auth-section__form__input"
 						value={this.state.e_mail}
 						onChange={this.handleChange}
 						name="e_mail"
 						type="email"
 						placeholder="imie.nazwisko@domena.pl"
+						required
 					/>
-					<button className="register__form__button">
+					<button className="auth-section__form__button">
 						Potwierdź email
 					</button>
 				</form>

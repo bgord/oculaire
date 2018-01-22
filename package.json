@@ -23,6 +23,7 @@
 		"jsdom": "^11.5.1",
 		"locreq": "^1.1.0",
 		"parcel-bundler": "^1.4.1",
+		"query-string": "^5.0.1",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"nodemailer": "^4.4.1",

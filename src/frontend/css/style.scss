@@ -21,6 +21,10 @@ h2 {
     font-weight: 200;
 }
 
+:required {
+    box-shadow: none;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -33,11 +37,14 @@ h2 {
     background-color: $darker;
 }
 
-.register {
+.auth-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 2rem;
+    &--close-to-top {
+        margin-top: 1rem;
+    }
     &__header {
         font-size: 1.33333rem;
     }
@@ -46,9 +53,16 @@ h2 {
         margin: 0 auto;
         &__label {
             display: block;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
             color: #555;
+            &--far-from-input {
+                margin-bottom: 0.5rem;
+            }
+            &--far-from-header {
+                margin-top: 2rem;
+            }
+            &--close-to-header {
+                margin-top: 1rem;
+            }
         }
         &__input {
             margin: 0 0 0.5rem auto;
@@ -58,6 +72,16 @@ h2 {
             border: 1px solid #ccc;
             color: #444;
             outline: none;
+            &--number {
+                min-width: 7rem;
+                width: 0%;
+            }
+        }
+        &__select {
+            margin: 0 0 0.5rem auto;
+            padding: 0 0.25rem;
+            height: 2rem;
+            min-width: 7rem;
         }
         &__button {
             display: block;
@@ -72,10 +96,11 @@ h2 {
 }
 
 @media all and (max-width: 15.5rem) {
-    .register {
+    .auth-section {
         margin-top: 1rem;
         &__header {
             padding: 0 0.5rem;
+            margin-top: 0;
         }
         &__form {
             padding: 0 0.5rem;
@@ -84,8 +109,16 @@ h2 {
                 width: 100%;
                 font-size: 0.6rem;
                 font-weight: 400;
+                &--number {
+                    min-width: 6rem;
+                    width: 0%;
+                }
             }
-            &__label {
+            &__select {
+                font-size: 0.6rem;
+                font-weight: 400;
+            }
+            &__label--far-from-header {
                 margin-top: 1rem;
             }
         }
