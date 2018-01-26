@@ -25,6 +25,7 @@
 		"parcel-bundler": "^1.4.1",
 		"query-string": "^5.0.1",
 		"react": "^16.2.0",
+		"react-copy-to-clipboard": "^5.0.1",
 		"react-dom": "^16.2.0",
 		"nodemailer": "^4.4.1",
 		"react-router-dom": "^4.2.2",
@@ -43,6 +44,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@3846masa/axios-cookiejar-support": "^0.1.4",
+		"babel-preset-stage-0": "^6.24.1",
 		"chai": "^4.1.2",
 		"mocha": "^3.5.3",
 		"node-sass": "^4.7.2",

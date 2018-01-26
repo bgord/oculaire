@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
 import qs from "query-string";
+import { Link } from "react-router-dom";
+import MaskablePassword from "./MaskablePassword.jsx";
 
 const ENG_TO_PLN = {
 	token: "token",
@@ -31,9 +33,11 @@ export default class FinishRegistration extends PureComponent {
 			document.location = "/";
 		} else this.setState({ token });
 	}
-
 	generateChangeHandler(name) {
-		return e => this.setState({ [name]: e.target.value });
+		return e =>
+			this.setState({
+				[name]: e.target.value,
+			});
 	}
 
 	handleSubmit(e) {
@@ -89,20 +93,9 @@ export default class FinishRegistration extends PureComponent {
 						required
 					/>
 
-					<label
-						className="auth-section__form__label"
-						htmlFor="password"
-					>
-						Hasło:
-					</label>
-					<input
-						className="auth-section__form__input"
-						value={this.state.password}
-						onChange={this.generateChangeHandler("password")}
-						name="password"
-						type="password"
-						placeholder="trudne-do-złamania"
-						required
+					<MaskablePassword
+						password_value={this.state.password}
+						handleChange={this.generateChangeHandler("password")}
 					/>
 
 					<label
@@ -124,7 +117,12 @@ export default class FinishRegistration extends PureComponent {
 					</select>
 
 					<label className="auth-section__form__label" htmlFor="goal">
-						Cel kcal/dzień:
+						Cel kcal/dzień: (<a
+							target="_blank"
+							href="/FAQ#jak-rozsądnie-wybrać-cel"
+						>
+							jak wybrać cel?
+						</a>)
 					</label>
 					<input
 						className="auth-section__form__input auth-section__form__input--number"

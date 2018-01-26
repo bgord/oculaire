@@ -10,7 +10,9 @@ export default RequireLogin(
 		render() {
 			return (
 				<Fragment>
-					<h2>App - restricted view for {this.props.e_mail} </h2>
+					<h2>
+						App - restricted view for {this.props.user_data.e_mail}{" "}
+					</h2>
 					{/* This button is temporary and will be changed in  T644*/}
 					<button onClick={handle_logout}>Logout</button>
 				</Fragment>

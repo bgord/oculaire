@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
+import handle_login from "../../utils/login";
 
 export default class Login extends PureComponent {
 	constructor() {
@@ -26,18 +27,7 @@ export default class Login extends PureComponent {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		return axios
-			.post("/api/v1/sessions", this.state)
-			.then(() => {
-				document.location = "/app";
-			})
-			.catch(e => {
-				const msg =
-					e.response.data.type === "invalid_credentials"
-						? "Nieprawidłowy login lub hasło."
-						: "Wystąpił błąd.";
-				alert(msg);
-			});
+		return handle_login(this.state);
 	}
 	render() {
 		return (

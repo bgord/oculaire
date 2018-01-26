@@ -3,35 +3,34 @@ import axios from "axios";
 
 export default (Component, title) =>
 	class RequireLogin extends PureComponent {
-		constructor() {
-			super();
-			this.state = {
-				render_component: false,
-				child_props: {},
-			};
-			document.title = "oculaire - autoryzacja";
-		}
 		componentDidMount() {
+			document.title = "oculaire - autoryzacja";
 			return axios
 				.get("/api/v1/users/me")
 				.then(resp => {
-					const { e_mail, gender, username } = resp.data.body;
-					const child_props = {
-						e_mail,
-						gender,
-						username,
-					};
-					this.setState({ render_component: true, child_props });
 					document.title = title;
+					const { e_mail, gender, username } = resp.data.body;
+					this.props.set_user_state({
+						is_logged_in: true,
+						user_data: {
+							e_mail,
+							gender,
+							username,
+						},
+					});
 				})
 				.catch(e => {
-					this.setState({ render_component: false });
-					document.location = "/login";
+					this.props.set_user_state({
+						is_logged_in: false,
+						user_data: {},
+					});
+					const to = encodeURIComponent(document.URL);
+					document.location = `/login?redirect=${to}`;
 				});
 		}
 		render() {
-			return this.state.render_component ? (
-				<Component {...this.props} {...this.state.child_props} />
+			return this.props.is_logged_in ? (
+				<Component {...this.props} />
 			) : (
 				"Autoryzacja..."
 			);
