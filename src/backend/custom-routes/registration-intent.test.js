@@ -1,5 +1,6 @@
 const axios = require("axios");
 const sinon = require("sinon");
+const assert_missing_params_error = require("../test_utils/assert_missing_params_error");
 
 let clock;
 
@@ -10,9 +11,7 @@ describe("registration-intent", () => {
 	it("Rejects when e_mail field is not present", () =>
 		axios
 			.post(REGISTRATION_URL)
-			.catch(e =>
-				Assert.deepEqual("no-email", e.response.data.message.type)
-			));
+			.catch(e => assert_missing_params_error(e, ["e_mail"])));
 
 	it("Rejects when account with the given e_mail exists", () =>
 		axios

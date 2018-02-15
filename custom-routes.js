@@ -6,14 +6,14 @@ const fs = Promise.promisifyAll(require("fs"));
 module.exports = function(App) {
 	const www_server = App.ChipManager.get_chip("channel", "www-server");
 
-	require("./src/backend/custom-routes/registration-intent").route(
-		App,
-		www_server
-	);
-
-	require("./src/backend/custom-routes/finish-registration").route(
-		App,
-		www_server
+	const custom_routes = [
+		"finish-registration",
+		"registration-intent",
+		"password-reset-intent",
+		"confirm-password-reset",
+	];
+	custom_routes.forEach(custom_route =>
+		require(`./src/backend/custom-routes/${custom_route}`)(App, www_server)
 	);
 
 	www_server.custom_raw_route({

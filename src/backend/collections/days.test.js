@@ -1,5 +1,5 @@
 const axios = require("axios");
-const get_collection_as = require("../utils/get_collection_as");
+const get_collection_as = require("../test_utils/get_collection_as");
 
 describe("Days collection", () => {
 	it("Allows the owner to update his water_intake field", () => {

@@ -15,6 +15,7 @@ const dependencies = [
 	"collections/goals.js",
 	"collections/dayproducts.js",
 	"collections/activities.js",
+	"collections/tokens.js",
 ];
 
 dependencies.forEach(dependency => require(`./${dependency}`)(App));

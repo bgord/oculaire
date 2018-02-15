@@ -1,5 +1,5 @@
 const axios = require("axios");
-const get_collection_as = require("../utils/get_collection_as");
+const get_collection_as = require("../test_utils/get_collection_as");
 const { _app: App } = require("../app");
 
 const create_resource_as = (collection_name, data, user = null) => {

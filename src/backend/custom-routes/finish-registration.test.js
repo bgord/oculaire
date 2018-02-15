@@ -2,7 +2,8 @@ const app = require("../app")._app;
 const tough = require("tough-cookie");
 const axios = require("axios");
 const uuid = require("uuid/v4");
-const login = require("../utils/login");
+const login = require("../test_utils/login");
+const assert_missing_params_error = require("../test_utils/assert_missing_params_error");
 
 const expired_intent_token = uuid();
 const valid_intent_token = uuid();
@@ -21,33 +22,27 @@ const VALID_USER = {
 const FINISH_REGISTRATION_URL = `http://localhost:8081/api/v1/finish-registration`;
 const WEEK = 1000 * 60 * 60 * 24 * 7;
 
-const create_intent = ({ e_mail, token, expires_at }) =>
+const create_intent = intent =>
 	app.run_action(
 		new app.Sealious.SuperContext(),
 		["collections", "registration-intents"],
 		"create",
-		{
-			e_mail,
-			token,
-			expires_at,
-		}
+		intent
 	);
 
 describe("finish-registration", () => {
 	it("Rejects if token is empty", () =>
-		axios.post(FINISH_REGISTRATION_URL).catch(e =>
-			Assert.deepEqual(e.response.data.message, {
-				type: "missing-param",
-				content: "Nie wszystkie pola zostały podane: ",
-				additional_info: [
+		axios
+			.post(FINISH_REGISTRATION_URL)
+			.catch(e =>
+				assert_missing_params_error(e, [
 					"token",
 					"username",
 					"password",
 					"gender",
 					"goal",
-				],
-			})
-		));
+				])
+			));
 	it("Rejects if token is wrong", () =>
 		axios
 			.post(FINISH_REGISTRATION_URL, {

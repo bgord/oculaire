@@ -22,8 +22,7 @@ module.exports = function(app) {
 	]);
 
 	Users.set_access_strategy({
-		default: "themselves",
-		create: "noone",
-		delete: "noone",
+		default: "noone",
+		retrieve: "themselves",
 	});
 };

@@ -10,7 +10,7 @@ const axios = require("axios");
 const axiosCookieJarSupport = require("@3846masa/axios-cookiejar-support");
 const tough = require("tough-cookie");
 axiosCookieJarSupport(axios);
-const login = require("./src/backend/utils/login");
+const login = require("./src/backend/test_utils/login");
 
 global.Assert = require("chai").assert;
 
