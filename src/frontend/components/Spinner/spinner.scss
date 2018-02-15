@@ -1,0 +1,47 @@
+.sk-wave {
+    width: 5rem;
+    height: 2rem;
+    text-align: center;
+    position: absolute;
+    top: 7rem;
+    left: calc(50% - 2.5rem);
+}
+
+.sk-wave .sk-rect {
+    background-color: $darker;
+    height: 100%;
+    width: 1rem;
+    display: inline-block;
+    animation: sk-waveStretchDelay 1s infinite ease-in-out;
+}
+
+.sk-wave .sk-rect1 {
+    animation-delay: -1.2s;
+}
+
+.sk-wave .sk-rect2 {
+    animation-delay: -1.1s;
+}
+
+.sk-wave .sk-rect3 {
+    animation-delay: -1s;
+}
+
+.sk-wave .sk-rect4 {
+    animation-delay: -0.9s;
+}
+
+.sk-wave .sk-rect5 {
+    animation-delay: -0.8s;
+}
+
+@keyframes sk-waveStretchDelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.5);
+    }
+    20% {
+        transform: scaleY(1);
+    }
+}

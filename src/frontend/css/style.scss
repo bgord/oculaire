@@ -1,7 +1,9 @@
-@import "reset.css";
 $dark: #4f5d75;
 $darker: #2d3142;
+$darker-hover: #3e4252;
 $light: #bfc0c0;
+@import "reset.css";
+@import "../components/Spinner/spinner.scss";
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,6 +24,7 @@ h2 {
 }
 
 a {
+    outline: none;
     text-decoration: none;
     color: $dark;
 }
@@ -35,6 +38,7 @@ a:hover {
 }
 
 .container {
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -42,8 +46,50 @@ a:hover {
 }
 
 .navigation {
-    height: 2rem;
+    width: 100%;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    position: fixed;
     background-color: $darker;
+    &__list {
+        display: flex;
+        max-width: none;
+        width: 100%;
+        padding: 0;
+        list-style: none;
+        &__item {
+            height: 2rem;
+            margin-right: 0;
+            &:hover {
+                cursor: pointer;
+                background: $darker-hover;
+            }
+            &--toggle {
+                display: none;
+            }
+            &--logo {
+                margin-left: 0;
+                margin-right: auto;
+            }
+            &__link {
+                display: block;
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                color: $light;
+                &:hover {
+                    text-decoration: none;
+                }
+                &--logo {
+                    padding: 0;
+                }
+                &__logo {
+                    padding: 0.25rem 1rem;
+                    height: 2rem;
+                }
+            }
+        }
+    }
 }
 
 .unmask-password {
@@ -156,6 +202,33 @@ a:hover {
             }
             &__label--far-from-header {
                 margin-top: 1rem;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 27.5rem) {
+    .navigation {
+        &__list {
+            flex-flow: column nowrap;
+            &__item {
+                display: none;
+                border-top: 1px solid $darker-hover;
+                &--toggle {
+                    display: block;
+                    width: 3rem;
+                    text-align: left;
+                    border-top: none;
+                }
+                &--display-collapsed {
+                    display: block;
+                }
+                &--logo {
+                    margin-right: 0;
+                }
+                &__link {
+                    text-align: center;
+                }
             }
         }
     }

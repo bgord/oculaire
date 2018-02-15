@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
+import Spinner from "../components/Spinner/Spinner";
 
 export default (Component, title) =>
 	class RequireLogin extends PureComponent {
@@ -32,7 +33,7 @@ export default (Component, title) =>
 			return this.props.is_logged_in ? (
 				<Component {...this.props} />
 			) : (
-				"Autoryzacja..."
+				<Spinner />
 			);
 		}
 	};

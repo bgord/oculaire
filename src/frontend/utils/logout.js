@@ -4,7 +4,7 @@ module.exports = () =>
 	axios
 		.delete("/api/v1/sessions/current")
 		.then(() => {
-			document.location = "/login";
+			document.location = "/";
 		})
 		.catch(e => {
 			console.log(e);

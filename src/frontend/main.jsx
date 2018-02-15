@@ -9,6 +9,8 @@ import FinishRegistration from "./components/FinishRegistration/FinishRegistrati
 import Login from "./components/Login/Login";
 import App from "./components/App/App";
 import FAQ from "./components/FAQ/FAQ";
+import Logout from "./components/Logout/Logout";
+import handle_logout from "./utils/logout";
 
 export default class Application extends PureComponent {
 	constructor() {
@@ -52,6 +54,16 @@ export default class Application extends PureComponent {
 								<App
 									{...this.state}
 									set_user_state={this.set_user_state}
+								/>
+							)}
+						/>
+						<Route
+							path="/logout"
+							exact
+							render={() => (
+								<Logout
+									{...this.state}
+									handle_logout={handle_logout}
 								/>
 							)}
 						/>
