@@ -29,7 +29,7 @@ describe("confirm-password-reset", () => {
 				password: "veryrandompassword",
 			})
 			.catch(e =>
-				Assert.deepEqual(e.response.data.message.type, "invalid-token")
+				Assert.deepEqual(e.response.data.message.type, "wrong-token")
 			));
 
 	it("Rejects if token is expired", async () => {

@@ -1,16 +1,11 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
-import qs from "query-string";
 import { Link } from "react-router-dom";
-import MaskablePassword from "./MaskablePassword.jsx";
-
-const ENG_TO_PLN = {
-	token: "token",
-	username: "nazwa użytkownika",
-	password: "hasło",
-	gender: "zaimek",
-	goal: "cel",
-};
+import MaskablePassword from "../MaskablePassword/MaskablePassword";
+import {
+	confirm_token,
+	require_url_token_to_mount_component,
+} from "../../utils/forms_utils";
 
 export default class FinishRegistration extends PureComponent {
 	constructor() {
@@ -25,13 +20,10 @@ export default class FinishRegistration extends PureComponent {
 		document.title = "oculaire - potwierdź rejestrację";
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.generateChangeHandler = this.generateChangeHandler.bind(this);
+		this.checkForToken = require_url_token_to_mount_component.bind(this);
 	}
 	componentWillMount() {
-		const { token } = qs.parse(location.search);
-		if (!token) {
-			alert("Niepoprawny link!");
-			document.location = "/";
-		} else this.setState({ token });
+		this.checkForToken();
 	}
 	generateChangeHandler(name) {
 		return e =>
@@ -45,28 +37,12 @@ export default class FinishRegistration extends PureComponent {
 		if (this.state.gender === "choose-gender") {
 			alert("Wybierz swój preferowany zaimek.");
 		} else
-			return axios
-				.post("/api/v1/finish-registration", this.state)
-				.then(resp => {
-					alert(resp.data.content);
-					document.location = "/login";
-				})
-				.catch(e => {
-					let {
-						content,
-						type,
-						additional_info,
-					} = e.response.data.message;
-					if (type === "missing-param") {
-						content += `${additional_info
-							.map(param => ENG_TO_PL[param])
-							.join(", ")}!`;
-					}
-					alert(content);
-					if (type === "wrong-token") {
-						document.location = "/register";
-					}
-				});
+			return confirm_token({
+				url: "/api/v1/finish-registration",
+				body: this.state,
+				redirect_to_after_success: "/login",
+				redirect_to_after_error: "/register",
+			});
 	}
 	render() {
 		return (

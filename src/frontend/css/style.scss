@@ -95,11 +95,11 @@ a:hover {
 .unmask-password {
     position: absolute;
     height: 1rem;
-    top: 1.5rem;
     right: 0.5rem;
     font-size: 0.55rem;
     cursor: pointer;
     color: $dark;
+    padding: 0 .33rem;
 }
 
 .faq__section {
@@ -172,6 +172,16 @@ a:hover {
             margin: 0 auto 1rem auto;
             &:hover {
                 cursor: pointer;
+            }
+        }
+        &__help {
+            height: 1rem;
+            text-align: center;
+            &__text {
+                padding-right: 0.25rem;
+            }
+            &__link {
+                color: lighten($dark, 10);
             }
         }
     }

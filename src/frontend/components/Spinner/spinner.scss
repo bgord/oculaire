@@ -40,8 +40,10 @@
     40%,
     100% {
         transform: scaleY(0.5);
+        opacity: 0.5;
     }
     20% {
         transform: scaleY(1);
+        opacity: 1;
     }
 }

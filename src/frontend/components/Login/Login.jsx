@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
 import handle_login from "../../utils/login";
+import { Link } from "react-router-dom";
 
 export default class Login extends PureComponent {
 	constructor() {
@@ -73,6 +74,14 @@ export default class Login extends PureComponent {
 					<button className="auth-section__form__button">
 						Zaloguj się
 					</button>
+					<div className="auth-section__form__help">
+						<Link
+							className="auth-section__form__help__link"
+							to="password-reset-intent"
+						>
+							Nie pamiętasz hasła?
+						</Link>
+					</div>
 				</form>
 			</section>
 		);

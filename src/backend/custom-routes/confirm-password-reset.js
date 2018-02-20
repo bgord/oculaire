@@ -1,6 +1,6 @@
 const messages = {
 	"missing-params": "Nie wszystkie pola zostały podane: ",
-	"invalid-token": "Nieznany token resetujący hasło.",
+	"wrong-token": "Nieznany token resetujący hasło.",
 	"inactive-token": "Nieaktywny token resetujący hasło.",
 	"password-changed": "Hasło zostało zmienione.",
 };
@@ -32,7 +32,7 @@ module.exports = (App, www_server) =>
 				}
 			);
 			if (!intent) {
-				return SEND_ERROR("invalid-token");
+				return SEND_ERROR("wrong-token");
 			}
 			if (intent.body.expires_at < Date.now()) {
 				return SEND_ERROR("inactive-token");

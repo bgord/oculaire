@@ -6,6 +6,8 @@ import RegisterIntent from "./components/RegisterIntent/RegisterIntent";
 import Main from "./components/Main/Main";
 import NoMatch from "./components/NoMatch/NoMatch";
 import FinishRegistration from "./components/FinishRegistration/FinishRegistration";
+import PasswordResetIntent from "./components/PasswordResetIntent/PasswordResetIntent";
+import AddNewPassword from "./components/AddNewPassword/AddNewPassword";
 import Login from "./components/Login/Login";
 import App from "./components/App/App";
 import FAQ from "./components/FAQ/FAQ";
@@ -44,6 +46,16 @@ export default class Application extends PureComponent {
 							path="/finish-registration"
 							exact
 							component={FinishRegistration}
+						/>
+						<Route
+							path="/password-reset-intent"
+							exact
+							component={PasswordResetIntent}
+						/>
+						<Route
+							path="/password-reset"
+							exact
+							component={AddNewPassword}
 						/>
 						<Route path="/FAQ" exact component={FAQ} />
 						<Route path="/login" exact component={Login} />

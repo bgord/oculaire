@@ -15,7 +15,11 @@ export default class MaskablePassword extends PureComponent {
 		return (
 			<Fragment>
 				<label
-					className="auth-section__form__label"
+					className={`auth-section__form__label ${
+						this.props.is_first_input
+							? "auth-section__form__label--far-from-input auth-section__form__label--far-from-header"
+							: ""
+					}`}
 					htmlFor="password"
 					style={{ position: "relative" }}
 				>
@@ -23,6 +27,12 @@ export default class MaskablePassword extends PureComponent {
 					<span
 						className="unmask-password"
 						onClick={this.toggleUnmaskPassword}
+						style={{
+							display: this.props.password_value
+								? "inline"
+								: "none",
+							top: this.props.is_first_input ? "2rem" : "1.5rem",
+						}}
 					>
 						{this.state.unmask_password ? "ukryj" : "pokaż"}
 					</span>
