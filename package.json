@@ -12,13 +12,15 @@
 		"build":
 			"parcel build src/frontend/index.html --out-dir public --public-url /",
 		"watch":
-			"parcel watch src/frontend/index.html --no-hmr --out-dir public --public-url /"
+			"parcel watch src/frontend/index.html --no-hmr --out-dir public --public-url /",
+		"lt": "lt --port 8081 --subdomain oculaire"
 	},
 	"dependencies": {
 		"axios": "^0.17.1",
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
 		"bluebird": "^3.5.1",
+		"classnames": "^2.2.5",
 		"date-fns": "^1.29.0",
 		"jsdom": "^11.5.1",
 		"locreq": "^1.1.0",

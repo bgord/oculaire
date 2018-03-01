@@ -1,0 +1,101 @@
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+    &--close-to-top {
+        margin-top: 1rem;
+    }
+    &__header {
+        font-size: 1.33333rem;
+    }
+    &__form {
+        display: inline-block;
+        margin: 0 auto;
+        &__label {
+            display: block;
+            color: #555;
+            &--far-from-input {
+                margin-bottom: 0.5rem;
+            }
+            &--far-from-header {
+                margin-top: 2rem;
+            }
+            &--close-to-header {
+                margin-top: 1rem;
+            }
+        }
+        &__input {
+            margin: 0 0 0.5rem auto;
+            padding: 0 0.75rem;
+            height: 2rem;
+            min-width: 12rem;
+            border: 1px solid #ccc;
+            color: #444;
+            outline: none;
+            &--number {
+                min-width: 7rem;
+                width: 0%;
+            }
+        }
+        &__select {
+            margin: 0 0 0.5rem auto;
+            padding: 0 0.25rem;
+            height: 2rem;
+            min-width: 7rem;
+        }
+        &__button {
+            display: block;
+            border-radius: 0;
+            background: #f6f6f6;
+            border: 1px solid lighten($dark, 50);
+            height: 2rem;
+            width: 100%;
+            margin: 0 auto 1rem auto;
+            &:hover {
+                cursor: pointer;
+                background: #f3f3f3;
+            }
+        }
+        &__help {
+            height: 1rem;
+            text-align: center;
+            &__text {
+                padding-right: 0.25rem;
+            }
+            &__link {
+                color: lighten($dark, 10);
+            }
+        }
+    }
+}
+
+@media all and (max-width: 15.5rem) {
+    .auth-section {
+        margin-top: 1rem;
+        &__header {
+            padding: 0 0.5rem;
+            margin-top: 0;
+        }
+        &__form {
+            padding: 0 0.5rem;
+            &__input {
+                min-width: 10rem;
+                width: 100%;
+                font-size: 0.6rem;
+                font-weight: 400;
+                &--number {
+                    min-width: 6rem;
+                    width: 0%;
+                }
+            }
+            &__select {
+                font-size: 0.6rem;
+                font-weight: 400;
+            }
+            &__label--far-from-header {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

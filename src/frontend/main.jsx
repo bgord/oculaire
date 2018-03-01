@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import classnames from "classnames";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import RegisterIntent from "./components/RegisterIntent/RegisterIntent";
 import Main from "./components/Main/Main";
@@ -33,55 +34,67 @@ export default class Application extends PureComponent {
 	render() {
 		return (
 			<Router>
-				<div className="container">
-					<Navbar {...this.state} />
-					<Switch>
-						<Route path="/" exact component={Main} />
-						<Route
-							path="/register"
-							exact
-							component={RegisterIntent}
-						/>
-						<Route
-							path="/finish-registration"
-							exact
-							component={FinishRegistration}
-						/>
-						<Route
-							path="/password-reset-intent"
-							exact
-							component={PasswordResetIntent}
-						/>
-						<Route
-							path="/password-reset"
-							exact
-							component={AddNewPassword}
-						/>
-						<Route path="/FAQ" exact component={FAQ} />
-						<Route path="/login" exact component={Login} />
-						<Route
-							path="/app"
-							exact
-							render={() => (
-								<App
-									{...this.state}
-									set_user_state={this.set_user_state}
+				<Route
+					render={({ location }) => (
+						<div
+							className={classnames({
+								container: true,
+								"container-app": location.pathname.includes(
+									"/app/journal"
+								),
+							})}
+						>
+							<Navbar {...this.state} />
+							<Switch>
+								<Route path="/" exact component={Main} />
+								<Route
+									path="/register"
+									exact
+									component={RegisterIntent}
 								/>
-							)}
-						/>
-						<Route
-							path="/logout"
-							exact
-							render={() => (
-								<Logout
-									{...this.state}
-									handle_logout={handle_logout}
+								<Route
+									path="/finish-registration"
+									exact
+									component={FinishRegistration}
 								/>
-							)}
-						/>
-						<Route component={NoMatch} />
-					</Switch>
-				</div>
+								<Route
+									path="/password-reset-intent"
+									exact
+									component={PasswordResetIntent}
+								/>
+								<Route
+									path="/password-reset"
+									exact
+									component={AddNewPassword}
+								/>
+								<Route path="/FAQ" exact component={FAQ} />
+								<Route path="/login" exact component={Login} />
+								<Route
+									path="/app"
+									render={({ match }) => (
+										<App
+											{...this.state}
+											{...match}
+											{...location}
+											set_user_state={this.set_user_state}
+										/>
+									)}
+								/>
+								<Route
+									path="/logout"
+									exact
+									render={() => (
+										<Logout
+											{...this.state}
+											handle_logout={handle_logout}
+										/>
+									)}
+								/>
+								<Route component={NoMatch} />
+							</Switch>
+						</div>
+					)}
+				/>
 			</Router>
 		);
 	}

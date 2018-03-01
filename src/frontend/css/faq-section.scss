@@ -1,0 +1,17 @@
+.faq__section {
+    &__header {
+        padding: .25rem;
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: none;
+        width: 100%;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+        &__item {
+            max-width: 25rem;
+        }
+    }
+}

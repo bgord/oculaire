@@ -4,6 +4,10 @@ $darker-hover: #3e4252;
 $light: #bfc0c0;
 @import "reset.css";
 @import "../components/Spinner/spinner.scss";
+@import "day-view.scss";
+@import "navigation.scss";
+@import "auth-section.scss";
+@import "faq-section.scss";
 * {
     box-sizing: border-box;
     margin: 0;
@@ -29,6 +33,13 @@ a {
     color: $dark;
 }
 
+button,
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 a:hover {
     text-decoration: underline;
 }
@@ -45,51 +56,8 @@ a:hover {
     min-height: 100vh;
 }
 
-.navigation {
-    width: 100%;
-    z-index: 3;
-    top: 0;
-    right: 0;
-    position: fixed;
-    background-color: $darker;
-    &__list {
-        display: flex;
-        max-width: none;
-        width: 100%;
-        padding: 0;
-        list-style: none;
-        &__item {
-            height: 2rem;
-            margin-right: 0;
-            &:hover {
-                cursor: pointer;
-                background: $darker-hover;
-            }
-            &--toggle {
-                display: none;
-            }
-            &--logo {
-                margin-left: 0;
-                margin-right: auto;
-            }
-            &__link {
-                display: block;
-                padding: 0.5rem 1rem;
-                text-decoration: none;
-                color: $light;
-                &:hover {
-                    text-decoration: none;
-                }
-                &--logo {
-                    padding: 0;
-                }
-                &__logo {
-                    padding: 0.25rem 1rem;
-                    height: 2rem;
-                }
-            }
-        }
-    }
+.container-app {
+    flex-direction: row;
 }
 
 .unmask-password {
@@ -100,146 +68,4 @@ a:hover {
     cursor: pointer;
     color: $dark;
     padding: 0 .33rem;
-}
-
-.faq__section {
-    &__header {
-        padding: 0;
-    }
-    &__list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: none;
-        width: 100%;
-        padding: 0 1rem;
-        &__item {
-            max-width: 25rem;
-        }
-    }
-}
-
-.auth-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 2rem;
-    &--close-to-top {
-        margin-top: 1rem;
-    }
-    &__header {
-        font-size: 1.33333rem;
-    }
-    &__form {
-        display: inline-block;
-        margin: 0 auto;
-        &__label {
-            display: block;
-            color: #555;
-            &--far-from-input {
-                margin-bottom: 0.5rem;
-            }
-            &--far-from-header {
-                margin-top: 2rem;
-            }
-            &--close-to-header {
-                margin-top: 1rem;
-            }
-        }
-        &__input {
-            margin: 0 0 0.5rem auto;
-            padding: 0 0.75rem;
-            height: 2rem;
-            min-width: 12rem;
-            border: 1px solid #ccc;
-            color: #444;
-            outline: none;
-            &--number {
-                min-width: 7rem;
-                width: 0%;
-            }
-        }
-        &__select {
-            margin: 0 0 0.5rem auto;
-            padding: 0 0.25rem;
-            height: 2rem;
-            min-width: 7rem;
-        }
-        &__button {
-            display: block;
-            height: 2rem;
-            width: 100%;
-            margin: 0 auto 1rem auto;
-            &:hover {
-                cursor: pointer;
-            }
-        }
-        &__help {
-            height: 1rem;
-            text-align: center;
-            &__text {
-                padding-right: 0.25rem;
-            }
-            &__link {
-                color: lighten($dark, 10);
-            }
-        }
-    }
-}
-
-@media all and (max-width: 15.5rem) {
-    .auth-section {
-        margin-top: 1rem;
-        &__header {
-            padding: 0 0.5rem;
-            margin-top: 0;
-        }
-        &__form {
-            padding: 0 0.5rem;
-            &__input {
-                min-width: 10rem;
-                width: 100%;
-                font-size: 0.6rem;
-                font-weight: 400;
-                &--number {
-                    min-width: 6rem;
-                    width: 0%;
-                }
-            }
-            &__select {
-                font-size: 0.6rem;
-                font-weight: 400;
-            }
-            &__label--far-from-header {
-                margin-top: 1rem;
-            }
-        }
-    }
-}
-
-@media all and (max-width: 27.5rem) {
-    .navigation {
-        &__list {
-            flex-flow: column nowrap;
-            &__item {
-                display: none;
-                border-top: 1px solid $darker-hover;
-                &--toggle {
-                    display: block;
-                    width: 3rem;
-                    text-align: left;
-                    border-top: none;
-                }
-                &--display-collapsed {
-                    display: block;
-                }
-                &--logo {
-                    margin-right: 0;
-                }
-                &__link {
-                    text-align: center;
-                }
-            }
-        }
-    }
 }

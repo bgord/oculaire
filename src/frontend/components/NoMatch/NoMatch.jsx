@@ -5,7 +5,7 @@ export default class NoMatch extends PureComponent {
 	componentDidMount() {
 		document.title = "oculaire - nie znaleziono";
 		setTimeout(() => {
-			document.location = "/";
+			document.location = this.props.redirect_to || "/";
 		}, 3000);
 	}
 	render() {
@@ -16,7 +16,9 @@ export default class NoMatch extends PureComponent {
 				</h2>
 				<span style={{ textAlign: "center", fontWeight: "300" }}>
 					Za 3 sekundy nastąpi przekierowywanie na{" "}
-					<Link to="/">stronę główną </Link>.
+					<Link to={this.props.redirect_to || "/"}>
+						stronę główną
+					</Link>.
 				</span>
 			</Fragment>
 		);

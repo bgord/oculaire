@@ -1,20 +1,27 @@
-import React, { PureComponent, Fragment } from "react";
+import React from "react";
 import RequireLogin from "../../utils/RequireLogin";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Journal from "../Journal/Journal";
 
-export default RequireLogin(
-	class App extends PureComponent {
-		constructor() {
-			super();
-		}
-		render() {
-			return (
-				<Fragment>
-					<h2>
-						App - restricted view for {this.props.user_data.e_mail}{" "}
-					</h2>
-				</Fragment>
-			);
-		}
-	},
-	"oculaire - dziennik kalorii"
-);
+const APP_MAIN_PAGE = "/app/journal/today";
+
+export default RequireLogin(props => (
+	<Switch>
+		<Route
+			exact
+			path={props.url}
+			render={() => <Redirect to={APP_MAIN_PAGE} />}
+		/>
+		<Route
+			exact
+			path={props.url + "/journal"}
+			render={() => <Redirect to={APP_MAIN_PAGE} />}
+		/>
+		<Route
+			exact
+			path={props.url + "/journal/:date"}
+			render={() => <Journal {...props} />}
+		/>
+		<Route render={() => <Redirect to={APP_MAIN_PAGE} />} />
+	</Switch>
+));
